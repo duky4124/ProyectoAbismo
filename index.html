@@ -1,11 +1,191 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#050607"><title>PROYECTO ABISMO</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050607">
+  <title>PROYECTO ABISMO</title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- Estilos para la nueva sección de Controles, Capítulos y Botón Final -->
+  <style>
+    /* Cuadrícula de Controles + Capítulos */
+    .gameplay-section {
+      padding: 60px 5%;
+      background: #040608;
+      color: #fff;
+    }
+    .gameplay-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) {
+      .gameplay-container { grid-template-columns: 1fr; }
+    }
+
+    .section-title {
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin: 10px 0 25px 0;
+      text-transform: uppercase;
+    }
+
+    /* Tabla de controles detallada */
+    .controls-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 20px;
+      margin-bottom: 25px;
+      font-family: monospace;
+      font-size: 0.95rem;
+    }
+    .ctrl-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #1a222d;
+      padding-bottom: 6px;
+    }
+    .ctrl-key {
+      color: #e6a122;
+      font-weight: bold;
+    }
+    .ctrl-action {
+      color: #d0d7de;
+    }
+    .mobile-notice {
+      color: #8b949e;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      border-left: 2px solid #e6a122;
+      padding-left: 12px;
+    }
+
+    /* Lista de Capítulos */
+    .chapters-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .chapter-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      background: #090d12;
+      border: 1px solid #161f2c;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+    .chapter-card.active {
+      border: 1px solid #00e676;
+      background: rgba(0, 230, 118, 0.05);
+    }
+    .chap-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .chap-num {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #586069;
+    }
+    .chapter-card.active .chap-num {
+      color: #00e676;
+    }
+    .chap-name {
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+    .chap-status {
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      color: #484f58;
+    }
+    .chapter-card.active .chap-status {
+      color: #00e676;
+      font-weight: bold;
+    }
+
+    /* Sección Final Call To Action */
+    .final-cta {
+      text-align: center;
+      padding: 90px 20px 70px 20px;
+      background: radial-gradient(circle at center, rgba(160, 20, 20, 0.25) 0%, #040608 70%);
+      position: relative;
+    }
+    .cta-eyebrow {
+      color: #00e5ff;
+      font-family: monospace;
+      letter-spacing: 4px;
+      font-size: 0.9rem;
+      margin-bottom: 25px;
+      text-transform: uppercase;
+    }
+    .btn-giant-play {
+      display: inline-block;
+      background: #c9182b;
+      color: #ffffff !important;
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: 4px;
+      padding: 20px 60px;
+      text-decoration: none;
+      border: 2px solid #ff334b;
+      box-shadow: 0 0 35px rgba(201, 24, 43, 0.6);
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+    }
+    .btn-giant-play:hover {
+      background: #e61f35;
+      transform: scale(1.04);
+      box-shadow: 0 0 50px rgba(255, 51, 75, 0.8);
+    }
+    .cta-subtext {
+      color: #8b949e;
+      font-family: monospace;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+    }
+
+    /* Cinta de advertencia industrial (Hazard Tape) */
+    .hazard-stripe {
+      height: 18px;
+      width: 100%;
+      background: repeating-linear-gradient(
+        -45deg,
+        #f5a623,
+        #f5a623 15px,
+        #111 15px,
+        #111 30px
+      );
+    }
+
+    /* Footer extendido */
+    .custom-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 5%;
+      background: #020304;
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: #555e69;
+      letter-spacing: 1px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+  </style>
 </head>
 <body>
+
+  <!-- Barra Superior -->
   <header class="topbar">
     <a class="brand" href="#inicio"><span>◆</span> PROYECTO ABISMO</a>
     <div class="top-actions">
@@ -13,6 +193,8 @@
       <a class="top-play" href="https://proyectoabismogame.pages.dev/" target="_blank">JUGAR AHORA</a>
     </div>
   </header>
+
+  <!-- Navegación lateral -->
   <nav class="side-nav" id="sideNav" aria-label="Navegación principal">
     <a href="#inicio" class="active"><i></i><span><b>0 m</b>INICIO</span></a>
     <a href="#juego"><i></i><span><b>-1.400 m</b>EL JUEGO</span></a>
@@ -20,12 +202,18 @@
     <a href="#sistemas"><i></i><span><b>-5.600 m</b>SISTEMAS</span></a>
     <a href="#controles"><i></i><span><b>-8.000 m</b>CONTROLES</span></a>
   </nav>
+
   <main>
+    <!-- Portada -->
     <section class="hero page-section" id="inicio">
-      <div class="hero-bg"></div><div class="hero-content">
-        <div class="tags"><span>NEXUS CORP · 2049</span><span>PROFUNDIDAD · -8.000 m</span><span class="tag-red">TERROR · SUPERVIVENCIA · 1.ª PERSONA</span></div>
-        <h1>PROYECTO
-<em>ABISMO</em></h1>
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <div class="tags">
+          <span>NEXUS CORP · 2049</span>
+          <span>PROFUNDIDAD · -8.000 m</span>
+          <span class="tag-red">TERROR · SUPERVIVENCIA · 1.ª PERSONA</span>
+        </div>
+        <h1>PROYECTO <em>ABISMO</em></h1>
         <p class="intro">En 2049, NEXUS descubre una instalación olvidada a ocho mil metros bajo tierra. Tu vehículo se estrella dentro y algo empieza a observarte desde la oscuridad. Explora, fabrica, escóndete y descubre qué ocurrió realmente en el Abismo.</p>
         <div class="hero-buttons">
           <a class="play-main" href="https://proyectoabismogame.pages.dev/" target="_blank">JUGAR AHORA</a>
@@ -34,30 +222,139 @@
         <p class="hero-note">Gratis · sin registro · funciona en PC, celular y tablet · el progreso se guarda en tu dispositivo.</p>
       </div>
     </section>
-    <div class="stats"><div><strong>01</strong><span>CAPÍTULO JUGABLE</span></div><div><strong>03</strong><span>TIPOS DE ENEMIGO</span></div><div><strong>10</strong><span>CAPÍTULOS PLANOS</span></div><div><strong>03</strong><span>FINALES PREVISTOS</span></div><div><strong>0</strong><span>REGISTROS</span></div></div>
+
+    <!-- Métricas -->
+    <div class="stats">
+      <div><strong>01</strong><span>CAPÍTULO JUGABLE</span></div>
+      <div><strong>03</strong><span>TIPOS DE ENEMIGO</span></div>
+      <div><strong>10</strong><span>CAPÍTULOS PLANEADOS</span></div>
+      <div><strong>03</strong><span>FINALES PREVISTOS</span></div>
+      <div><strong>0</strong><span>REGISTROS</span></div>
+    </div>
     <div class="hazard"></div>
+
+    <!-- Sinopsis -->
     <section class="story page-section" id="juego">
-      <div class="section-inner"><p class="eyebrow">-1.400 m · SINOPSIS</p><h2>EL JUEGO</h2>
-        <div class="story-grid"><div class="story-copy">
-          <p><b>Dan Ortega</b> es un operario de rescate asignado a una misión rutinaria: investigar por qué NEXUS perdió el contacto con su instalación más profunda. El accidente de su vehículo lo deja atrapado a ocho mil metros, sin comunicaciones fiables y con la única compañía de la voz de Lena por la radio.</p>
-          <p>La instalación no estaba vacía. Los experimentos con organismos desconocidos salieron mal, y algo patrulla ahora los pasillos. <b>El Observador</b> se queda de pie al fondo del corredor mirándote: si lo apartas de tu campo de visión, se acerca; si corres, te oye.</p>
-          <p>Reúne materiales y fabrica herramientas, encuentra baterías antes de que tu linterna se apague, descifra los códigos de seguridad, lee los documentos secretos de NEXUS y toma decisiones que condicionarán el desenlace. Y cuidado con esconderte: <strong class="red-text">si te ve entrar, sabrá dónde estás.</strong></p>
-          <p class="chapter-note">El Capítulo 1 <b>EL ACCIDENTE</b> está completo y jugable de principio a fin. Los capítulos siguientes (laboratorios, túneles, hospital secreto y el Experimento 09) se publicarán en futuras actualizaciones de esta misma página.</p>
-        </div><div class="feature-list">
-          <article><h3>EXPLORACIÓN LIBRE</h3><p>Cinco zonas conectadas con rutas alternativas, conductos, puertas bloqueadas y habitaciones secretas no obligatorias.</p></article>
-          <article><h3>SUPERVIVENCIA REAL</h3><p>Vida, resistencia, hambre, sed y batería. Correr gasta aliento; la linterna se apaga si no buscas pilas.</p></article>
-          <article><h3>ENEMIGOS CON IA</h3><p>Visión, distancia y oído. Sus apariciones varían para que nunca sepas dónde estarán.</p></article>
-          <article><h3>MISTERIO PROGRESIVO</h3><p>Documentos, grabaciones y personajes que ocultan la verdad sobre NEXUS y sobre ti.</p></article>
-        </div></div>
+      <div class="section-inner">
+        <p class="eyebrow">-1.400 m · SINOPSIS</p>
+        <h2>EL JUEGO</h2>
+        <div class="story-grid">
+          <div class="story-copy">
+            <p><b>Dan Ortega</b> es un operario de rescate asignado a una misión rutinaria: investigar por qué NEXUS perdió el contacto con su instalación más profunda. El accidente de su vehículo lo deja atrapado a ocho mil metros, sin comunicaciones fiables y con la única compañía de la voz de Lena por la radio.</p>
+            <p>La instalación no estaba vacía. Los experimentos con organismos desconocidos salieron mal, y algo patrulla ahora los pasillos. <b>El Observador</b> se queda de pie al fondo del corredor mirándote: si lo apartas de tu campo de visión, se acerca; si corres, te oye.</p>
+            <p>Reúne materiales y fabrica herramientas, encuentra baterías antes de que tu linterna se apague, descifra los códigos de seguridad, lee los documentos secretos de NEXUS y toma decisiones que condicionarán el desenlace. Y cuidado con esconderte: <strong class="red-text">si te ve entrar, sabrá dónde estás.</strong></p>
+            <p class="chapter-note">El Capítulo 1 <b>EL ACCIDENTE</b> está completo y jugable de principio a fin. Los capítulos siguientes (laboratorios, túneles, hospital secreto y el Experimento 09) se publicarán en futuras actualizaciones de esta misma página.</p>
+          </div>
+          <div class="feature-list">
+            <article><h3>EXPLORACIÓN LIBRE</h3><p>Cinco zonas conectadas con rutas alternativas, conductos, puertas bloqueadas y habitaciones secretas no obligatorias.</p></article>
+            <article><h3>SUPERVIVENCIA REAL</h3><p>Vida, resistencia, hambre, sed y batería. Correr gasta aliento; la linterna se apaga si no buscas pilas.</p></article>
+            <article><h3>ENEMIGOS CON IA</h3><p>Visión, distancia y oído. Sus apariciones varían para que nunca sepas dónde estarán.</p></article>
+            <article><h3>MISTERIO PROGRESIVO</h3><p>Documentos, grabaciones y personajes que ocultan la verdad sobre NEXUS y sobre ti.</p></article>
+          </div>
+        </div>
       </div>
     </section>
-    <section class="gallery page-section" id="imagenes"><div class="section-inner"><p class="eyebrow">-3.200 m · CAPTURAS</p><h2>IMÁGENES DEL JUEGO</h2>
-      <div class="gallery-grid"><figure><img src="gallery_1.jpg" alt="Vehículo accidentado en el hangar"><figcaption><b>EXPLORACIÓN</b><span>Hangar 7 — el impacto a -8.000 m</span></figcaption></figure><figure><img src="gallery_2.jpg" alt="Laboratorio abandonado de NEXUS"><figcaption><b>MISTERIO</b><span>Laboratorio abandonado de NEXUS</span></figcaption></figure><figure><img src="gallery_3.jpg" alt="Silueta del Observador en un pasillo"><figcaption><b>SUPERVIVENCIA</b><span>El Observador en el pasillo</span></figcaption></figure></div>
-      <p class="gallery-note">Capturas de referencia del proyecto. Podrás reemplazarlas por imágenes definitivas del juego.</p>
-    </div></section>
-    <section class="systems page-section" id="sistemas"><div class="section-inner"><p class="eyebrow">-5.600 m · SISTEMAS</p><h2>SOBREVIVIR ES <em>ADAPTARSE</em></h2><div class="system-grid"><article><b>01</b><h3>EXPLORACIÓN</h3><p>Busca rutas, accesos ocultos y zonas fuera del camino principal.</p></article><article><b>02</b><h3>RECURSOS</h3><p>Administra baterías, herramientas y materiales encontrados.</p></article><article><b>03</b><h3>AMENAZAS</h3><p>Observa el entorno, escucha y decide cuándo avanzar.</p></article></div></div></section>
-    <section class="controls page-section" id="controles"><div class="section-inner"><p class="eyebrow">-8.000 m · MANUAL DEL OPERADOR</p><h2>CONTROLES</h2><div class="control-list"><p><kbd>W A S D</kbd><span>Moverse</span><kbd>SHIFT</kbd><span>Correr</span></p><p><kbd>MOUSE</kbd><span>Mirar alrededor</span><kbd>E</kbd><span>Interactuar</span></p></div><p class="muted">Los controles y las funciones de juego se pueden ajustar para coincidir con la versión definitiva.</p></div></section>
-    <footer><span>◆ PROYECTO ABISMO</span><span>NEXUS CORP · ARCHIVO 2049</span></footer>
+
+    <!-- Galería -->
+    <section class="gallery page-section" id="imagenes">
+      <div class="section-inner">
+        <p class="eyebrow">-3.200 m · CAPTURAS</p>
+        <h2>IMÁGENES DEL JUEGO</h2>
+        <div class="gallery-grid">
+          <figure><img src="gallery_1.jpg" alt="Vehículo accidentado en el hangar"><figcaption><b>EXPLORACIÓN</b><span>Hangar 7 — el impacto a -8.000 m</span></figcaption></figure>
+          <figure><img src="gallery_2.jpg" alt="Laboratorio abandonado de NEXUS"><figcaption><b>MISTERIO</b><span>Laboratorio abandonado de NEXUS</span></figcaption></figure>
+          <figure><img src="gallery_3.jpg" alt="Silueta del Observador en un pasillo"><figcaption><b>SUPERVIVENCIA</b><span>El Observador en el pasillo</span></figcaption></figure>
+        </div>
+        <p class="gallery-note">Capturas de referencia del proyecto. Podrás reemplazarlas por imágenes definitivas del juego.</p>
+      </div>
+    </section>
+
+    <!-- Sistemas -->
+    <section class="systems page-section" id="sistemas">
+      <div class="section-inner">
+        <p class="eyebrow">-5.600 m · SISTEMAS</p>
+        <h2>SOBREVIVIR ES <em>ADAPTARSE</em></h2>
+        <div class="system-grid">
+          <article><b>01</b><h3>EXPLORACIÓN</h3><p>Busca rutas, accesos ocultos y zonas fuera del camino principal.</p></article>
+          <article><b>02</b><h3>RECURSOS</h3><p>Administra baterías, herramientas y materiales encontrados.</p></article>
+          <article><b>03</b><h3>AMENAZAS</h3><p>Observa el entorno, escucha y decide cuándo avanzar.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- NUEVA SECCIÓN: CONTROLES + CAPÍTULOS -->
+    <section class="gameplay-section page-section" id="controles">
+      <div class="gameplay-container">
+        
+        <!-- Columna Izquierda: Controles -->
+        <div>
+          <p class="eyebrow">-8.000 m · CÓMO SE JUEGA</p>
+          <h2 class="section-title">CONTROLES</h2>
+
+          <div class="controls-table">
+            <div class="ctrl-row"><span class="ctrl-key">W A S D</span><span class="ctrl-action">Moverse</span></div>
+            <div class="ctrl-row"><span class="ctrl-key">Ratón / arrastrar</span><span class="ctrl-action">Mirar</span></div>
+            <div class="ctrl-row"><span class="ctrl-key">Shift</span><span class="ctrl-action">Correr</span></div>
+            <div class="ctrl-row"><span class="ctrl-key">C</span><span class="ctrl-action">Agacharse</span></div>
+            <div class="ctrl-row"><span class="ctrl-key">Espacio</span><span class="ctrl-action">Saltar</span></div>
+            <div class="ctrl-row"><span class="ctrl-key">F</span><span class="ctrl-action">Linterna</span></div>
+            <div class="ctrl-row"><span class="ctrl-key">E</span><span class="ctrl-action">Interactuar / esconderse</span></div>
+            <div class="ctrl-row"><span class="ctrl-key">Tab</span><span class="ctrl-action">Mochila y fabricación</span></div>
+            <div class="ctrl-row"><span class="ctrl-key">G</span><span class="ctrl-action">Lanzar distractor</span></div>
+            <div class="ctrl-row"><span class="ctrl-key">Q</span><span class="ctrl-action">Curarse rápido</span></div>
+            <div class="ctrl-row"><span class="ctrl-key">Esc</span><span class="ctrl-action">Pausa</span></div>
+            <div class="ctrl-row"><span class="ctrl-key">R</span><span class="ctrl-action">Reintentar al morir</span></div>
+          </div>
+
+          <p class="mobile-notice">
+            En celular y tablet: joystick virtual a la izquierda (empújalo al borde para correr), arrastra en cualquier otra parte para mirar y usa los botones de pantalla.
+          </p>
+        </div>
+
+        <!-- Columna Derecha: Capítulos -->
+        <div>
+          <h2 class="section-title" style="margin-top: 35px;">CAPÍTULOS</h2>
+          <div class="chapters-list">
+            <div class="chapter-card active">
+              <div class="chap-left"><span class="chap-num">01</span><span class="chap-name">EL ACCIDENTE</span></div>
+              <span class="chap-status">DISPONIBLE</span>
+            </div>
+            <div class="chapter-card"><div class="chap-left"><span class="chap-num">02</span><span class="chap-name">LA INSTALACIÓN</span></div><span class="chap-status">PRÓXIMO</span></div>
+            <div class="chapter-card"><div class="chap-left"><span class="chap-num">03</span><span class="chap-name">EL PRIMER CONTACTO</span></div><span class="chap-status">PRÓXIMO</span></div>
+            <div class="chapter-card"><div class="chap-left"><span class="chap-num">04</span><span class="chap-name">EL LABORATORIO PRINCIPAL</span></div><span class="chap-status">PRÓXIMO</span></div>
+            <div class="chapter-card"><div class="chap-left"><span class="chap-num">05</span><span class="chap-name">LA CAZA</span></div><span class="chap-status">PRÓXIMO</span></div>
+            <div class="chapter-card"><div class="chap-left"><span class="chap-num">06</span><span class="chap-name">AGUAS NEGRAS</span></div><span class="chap-status">PRÓXIMO</span></div>
+            <div class="chapter-card"><div class="chap-left"><span class="chap-num">07</span><span class="chap-name">EL HOSPITAL</span></div><span class="chap-status">PRÓXIMO</span></div>
+            <div class="chapter-card"><div class="chap-left"><span class="chap-num">08</span><span class="chap-name">ORIGEN</span></div><span class="chap-status">PRÓXIMO</span></div>
+            <div class="chapter-card"><div class="chap-left"><span class="chap-num">09</span><span class="chap-name">EXPERIMENTO 09</span></div><span class="chap-status">PRÓXIMO</span></div>
+            <div class="chapter-card"><div class="chap-left"><span class="chap-num">10</span><span class="chap-name">EL ÚLTIMO ASCENSO</span></div><span class="chap-status">PRÓXIMO</span></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN FINAL: BOTÓN GIGANTE JUGAR -->
+    <section class="final-cta">
+      <p class="cta-eyebrow">¿ESTÁS LISTO PARA DESCENDER?</p>
+      <a class="btn-giant-play" href="https://proyectoabismogame.pages.dev/" target="_blank">
+        JUGAR AHORA
+      </a>
+      <p class="cta-subtext">Sin registro · sin instalación · gratis para todo el mundo</p>
+    </section>
+
+    <!-- Línea de Peligro -->
+    <div class="hazard-stripe"></div>
+
+    <!-- Footer Oficial -->
+    <footer class="custom-footer">
+      <span>PROYECTO ABISMO © 2049 · NEXUS CORP (ficticia)</span>
+      <span>MENÚ PRINCIPAL · GRATIS · SIN REGISTRO</span>
+    </footer>
+
   </main>
-  <div class="toast" id="toast" role="status"></div><script src="script.js"></script>
-</body></html>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
